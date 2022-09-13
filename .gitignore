@@ -1,0 +1,6 @@
+# zipped file containing both the validation and the train set
+data/archive.zip
+# train set
+data/Training
+# validation set
+data/Validation
