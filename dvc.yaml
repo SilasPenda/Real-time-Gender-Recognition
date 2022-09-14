@@ -1,0 +1,45 @@
+stages:
+  data_loading:
+    cmd: python src/load_data.py --path=params.yaml
+    deps:
+    - src/load_data.py
+    - gender-classification-dataset.zip
+    params:
+    - paths
+
+
+  preprocessing:
+    cmd: python src/preprocessing.py --path=params.yaml
+    deps:
+    - src/preprocessing.py
+    params:
+    - base
+    - path
+    - preprocessing
+    outs:
+    - data/train_image_batches.pk
+    - data/val_image_batches.pk
+
+  training:
+    cmd: python src/model.py --path=params.yaml
+    deps:
+    - src/model.py
+    - data/train_image_batches.pk
+    - data/val_image_batches.pk
+    params:
+    - paths
+    - base
+    - training
+    - preprocessing
+    outs:
+    - model/GR.h5
+  # evaluation:
+  #   cmd: python scr/evalution.py --path=params.yaml
+  #   deps:
+  #   - scr/evalution.py
+  #   params:
+  #   - paths
+  #   outs:
+  #   - report/visual/confusion_matrix.jpg
+  #   - report/visual/rocauc_curve.jpg
+  #   - report/metrics/metrics.json

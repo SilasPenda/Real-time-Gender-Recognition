@@ -1,0 +1,7 @@
+# libraries to install
+pandas == 1.2.4
+numpy == 1.20.2
+matplotlib == 3.4.2
+Pillow == 8.2.0
+tensorflow == 2.9.1
+tensorflow-hub == 0.12.0

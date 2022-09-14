@@ -1,0 +1,43 @@
+# Paths
+base: 
+    batch_size: 32
+
+loglevel: INFO
+
+
+paths:
+  data_root: "data"
+  zip_data: "gender-classification-dataset.zip"
+  train_path: "Training"
+  val_path: "Validation"
+  processed_train_path: "train_image_batches.pk"
+  processed_val_path: "val_image_batches.pk"
+  model: "model/GR.h5"
+
+
+preprocessing:
+  x_col: "Filepath"
+  y_col: "Label"
+  target_size: 224
+  color_mode: "rgb"
+  class_mode: "categorical"
+  shuffle: True
+  seed: 0
+  rotation_range: 30
+  zoom_range: 0.15
+  width_shift_range: 0.2
+  height_shift_range: 0.2
+  shear_range: 0.15
+  horizontal_flip: True
+  fill_mode: "nearest"
+
+training:
+  pretrain_w: "imagenet"
+  pretrain_p: "avg"
+  opt: "adam"
+  loss: "categorical_crossentropy"
+  metrics: "accuracy"
+  epoch: 20
+  monitor: 'val_loss'
+
+
