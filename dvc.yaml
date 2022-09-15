@@ -14,7 +14,7 @@ stages:
     - src/preprocessing.py
     params:
     - base
-    - path
+    - paths
     - preprocessing
     outs:
     - data/train_image_batches.pk

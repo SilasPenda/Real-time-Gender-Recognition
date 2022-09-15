@@ -6,7 +6,7 @@ import subprocess
 from zipfile import ZipFile
 import yaml
 from argparse import ArgumentParser
-from src.logs import get_logger
+from logs import get_logger
 from typing import List, Tuple
 
 

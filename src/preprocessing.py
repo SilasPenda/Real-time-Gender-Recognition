@@ -1,10 +1,10 @@
-from src import load_data
+import load_data
 import tensorflow as tf
 import pickle as pk
 import os
 import yaml
 from argparse import ArgumentParser
-from src.logs import get_logger
+from logs import get_logger
 
 parser = ArgumentParser()
 parser.add_argument("--path", "--p", default="params.yaml", dest="path", type=str, required=True)
@@ -16,6 +16,9 @@ with open(param_path) as file:
     config = yaml.safe_load(file)
 
 logger = get_logger("Preprocessing", log_level=config['loglevel'])
+logger.info("everything working file")
+
+import nothing
 
 train_image_paths, valid_image_paths = load_data.data_path_loader(config["paths"]["data_root"])
 logger.info("The paths of the images and the labels for the train and val set has been loaded")
