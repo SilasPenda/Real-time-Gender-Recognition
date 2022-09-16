@@ -57,6 +57,8 @@ train_images = train_generator.flow_from_dataframe(
     fill_mode = config["preprocessing"]["fill_mode"])
 logger.info("sucessfully")
 
+
+
 # Generate images using 'val_df' DataFrame
 logger.info("Reading val set into tensorflow data format")
 val_images = train_generator.flow_from_dataframe(
@@ -77,13 +79,5 @@ val_images = train_generator.flow_from_dataframe(
     horizontal_flip = config["preprocessing"]["horizontal_flip"],
     fill_mode = config["preprocessing"]["fill_mode"]
 )
+
 logger.info("sucessfully")
-
-
-with open(os.path.join(config["path"]["data_root"], config["paths"]["processed_train_path"]), "wb") as file:
-    pk.dump(train_images, file)
-logger.info("The tensorflow data for the train set has been pickled for later use")
-    
-with open(os.path.join(config["path"]["data_root"], config["paths"]["processed_val_path"]), "wb") as file:
-    pk.dump(val_images, file)
-logger.info("The tensorflow data for the val set has been pickled for later use")
