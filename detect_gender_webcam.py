@@ -3,7 +3,7 @@ from keras_preprocessing.image import load_img, img_to_array
 import numpy as np
 import cv2
 import os
-import cvlib as cv
+import cv2 as cv
 
 # Load the model
 model = load_model('GR.h5')

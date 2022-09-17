@@ -6,7 +6,7 @@ import subprocess
 from zipfile import ZipFile
 import yaml
 from argparse import ArgumentParser
-from src.logs import get_logger
+from logs import get_logger
 from typing import List, Tuple
 
 
@@ -60,8 +60,7 @@ def data_path_loader(rootpath:str) -> Tuple[List[str], List[str]]:
 
 def image_processing(filepath) -> pd.DataFrame:
     logger.info('functioning converting the path of images and the labels into a dataframe')
-    labels = [str(filepath[i]).split('/')[-2]
-             for i in range(len(filepath))]
+    labels = [str(filepath[i]).split(os.path.sep)[-2] for i in range(len(filepath))]
     
     # Create a DataFrame and input the filepath and labels
     filepath = pd.Series(filepath, name = 'Filepath').astype(str)

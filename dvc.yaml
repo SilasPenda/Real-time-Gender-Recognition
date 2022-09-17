@@ -14,18 +14,14 @@ stages:
     - src/preprocessing.py
     params:
     - base
-    - path
+    - paths
     - preprocessing
-    outs:
-    - data/train_image_batches.pk
-    - data/val_image_batches.pk
+
 
   training:
     cmd: python src/model.py --path=params.yaml
     deps:
     - src/model.py
-    - data/train_image_batches.pk
-    - data/val_image_batches.pk
     params:
     - paths
     - base
@@ -33,13 +29,3 @@ stages:
     - preprocessing
     outs:
     - model/GR.h5
-  # evaluation:
-  #   cmd: python scr/evalution.py --path=params.yaml
-  #   deps:
-  #   - scr/evalution.py
-  #   params:
-  #   - paths
-  #   outs:
-  #   - report/visual/confusion_matrix.jpg
-  #   - report/visual/rocauc_curve.jpg
-  #   - report/metrics/metrics.json
