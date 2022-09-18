@@ -6,3 +6,7 @@ Pillow == 8.2.0
 tensorflow == 2.9.1
 tensorflow-hub == 0.12.0
 kaggle==1.5.12
+tensor-board==
+pydrive2==
+dvc==
+dvc[gdrive]==
