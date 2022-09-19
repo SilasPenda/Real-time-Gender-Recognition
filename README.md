@@ -26,10 +26,10 @@ Below are the list of tools used in building the gender detection model
 You can set up an environment for the gender detection model by using the following commands:
 
 
-``` pip install tensorflow``` <br>
-`pip install cvlib`<br>
-```pip install pandas``` <br>
-`pip install opencv`<br>
+`$  pip install tensorflow` <br>
+`$ pip install cvlib`<br>
+`$ pip install pandas` <br>
+`$ pip install opencv`<br>
 
 
 
@@ -38,7 +38,21 @@ You can set up an environment for the gender detection model by using the follow
 
 
 ## DVC for MLOPs
-`pip install dvc` <br>
+
+DVC is built upon Git and its main goal is to codify data, models and piplines through the command line. Although DVC can work stand-alone, it's highly recommended to work aloginside <strong>Git</strong>
+
+DVC can be installed as a Python Library with pip package manager:
+
+`$ pip install dvc` <br>
+
+It is also possible to isntall DVC using conda:<br>
+`$ conda install -c conda-forge mamba`<br>
+`$ mamba install -c conda-forge dvc`<br>
+`$ mamba install -c conda-forge dvc-s3`<br>
+
+After installing DVC, you can go to your project's folder and initialize both Git and DVC: <br>
+`$ git init`<br>
+`$ dvc init`
 
 
 # PERFORMANCE
