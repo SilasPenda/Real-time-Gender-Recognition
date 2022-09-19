@@ -34,11 +34,7 @@ You can set up an environment for the gender detection model by using the follow
 `$ pip install pandas` <br>
 `$ pip install opencv`<br>
 `$ pip install matplotlib`<br>
-
-
-
-
-
+`$ pip install tensorflow-hub`
 
 ## DVC for MLOPs
 
