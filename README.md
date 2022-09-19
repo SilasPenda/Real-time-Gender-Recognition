@@ -5,35 +5,31 @@ Real time gender detection has become a critical component in the new domain of 
 In this project, we have used deep learning as a pre-cursor.
 <br>
 
+# DATA
+- Dataset was downloaded from Kaggle
+- Used chrome extension to download images of black men and women with afro.
+
+
+
 # TOOLS
 Below are the list of tools used in building the gender detection model
 
->- Python
->- Tensorflow
->- OpenCV
->- Pandas
->- Numpy
->- cvlib
+* Python
+* Tensorflow
+* OpenCV
+* Pandas
+* Numpy
+* cvlib
+
 # SET-UP
 
 You can set up an environment for the gender detection model by using the following commands:
 
 ```pip install pandas``` <br>
-``` pip install ```
-
-###
-<h3>Installing Tensorflow with the pip command</h3>
-<h4> System Requirement:</h4>
-
-* Ubuntu 16.04 or higher (64-bit)
-* macOS 10.12.6 (Sierra) or higher (64-bit)
-* Windows 7 or higher (64-bit)
-
-Use the command below to install the tensorflow <br>
 ``` pip install tensorflow```
 
 
-## DATA
+
 
 ## DVC for MLOPs
 
