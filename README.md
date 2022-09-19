@@ -25,8 +25,11 @@ Below are the list of tools used in building the gender detection model
 
 You can set up an environment for the gender detection model by using the following commands:
 
+
+``` pip install tensorflow``` <br>
+`pip install cvlib`<br>
 ```pip install pandas``` <br>
-``` pip install tensorflow```
+
 
 
 
