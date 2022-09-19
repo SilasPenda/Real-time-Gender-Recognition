@@ -17,20 +17,23 @@ Below are the list of tools used in building the gender detection model
 * Python
 * Tensorflow
 * OpenCV
+* cvlib
+* DVC
+* Matplotlib
 * Pandas
 * Numpy
-* cvlib
 
 # SET-UP
 
 You can set up an environment for the gender detection model by using the following commands:
 
-
+`$ pip install python`<br>
 `$  pip install tensorflow` <br>
+`$ pip install keras`
 `$ pip install cvlib`<br>
 `$ pip install pandas` <br>
 `$ pip install opencv`<br>
-
+`$ pip install matplotlib`<br>
 
 
 
