@@ -1,12 +1,11 @@
 from keras.models import load_model
-from keras_preprocessing.image import load_img, img_to_array
+from keras.preprocessing.image import load_img, img_to_array
 import numpy as np
 import cv2
 import os
-import cv2 as cv
 
 # Load the model
-model = load_model('GR.h5')
+model = load_model('model/GR.h5')
 
 # Select webcam
 webcam = cv2.VideoCapture(0)
@@ -23,7 +22,7 @@ while webcam.isOpened():
     status, frame = webcam.read()
     
     # Apply face detection
-    face, confidence = cv.detect_face(frame)
+    face, confidence = cv2.detect_face(frame)
     
     # Loop through the detected faces
     for idx, f in enumerate(face):
