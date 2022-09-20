@@ -5,3 +5,5 @@ data/Training
 # validation set
 data/Validation
 gender_detection
+model/logs_2022*
+model/checkpoint

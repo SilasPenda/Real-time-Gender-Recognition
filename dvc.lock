@@ -56,8 +56,8 @@ stages:
     cmd: python src/model.py --path=params.yaml
     deps:
     - path: src/model.py
-      md5: f8251250ec5caa8952aa624a2e72ea9a
-      size: 1891
+      md5: db14686f209e033595d35a8f7dbc790d
+      size: 2400
     params:
       params.yaml:
         base:
@@ -95,5 +95,5 @@ stages:
           monitor: val_loss
     outs:
     - path: model/GR.h5
-      md5: 50313fcdc90313f11a4702b1f916ac9f
+      md5: 2b86d23a5247f7e4ba16d5540c2b489e
       size: 11697664

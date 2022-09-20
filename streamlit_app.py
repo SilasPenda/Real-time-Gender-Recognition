@@ -1,22 +1,19 @@
-from keras.models import load_model
-from keras_preprocessing.image import img_to_array
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfiguration, VideoProcessorBase, WebRtcMode
 import av
 import cv2
-import cvlib as cv
+# import cvlib as cv
 import numpy as np
 
 
-model = load_model('GR.h5')
+# model = load_model('model/GR.h5')
 
 # Create gender classes
-classes = {
-    0: 'female',
-    1: 'male'
-}
+# classes = {0: 'female', 1: 'male'}
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+# face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     
 RTC_CONFIGURATION = RTCConfiguration(
 {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
@@ -24,41 +21,46 @@ RTC_CONFIGURATION = RTCConfiguration(
     
     
 class GenderDetection(VideoProcessorBase):
+
+    def __init__(self):
+        self.model = load_model('model/GR.h5')
+        self.classes = {0: 'female', 1: 'male'}
+        self.face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+
     def recv(self, frame):
         img = frame.to_ndarray(format = 'bgr24')
-        
-        # Convert image to grayscale
-        img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(
-            image = img_gray, scaleFactor = 1.1, minNeighbors = 3
-        )
 
-        for (x, y, w, h) in enumerate (faces):
+        # Convert image to grayscale
+        # img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        faces = self.face_cascade.detectMultiScale(image = img, scaleFactor = 1.1, minNeighbors = 3)
+
+        for x, y, w, h in faces:
             # Draw rectangle over face
             cv2.rectangle(img = img, pt1 = (x, y), pt2 = (x + w, y + h), color = (0, 255, 0), thickness = 2)
             
-            # Do preprocessing based on model
-            face_crop = img_gray[y:y + h, x:x + w]
-            face_crop = cv2.resize(face_crop, (224, 224))
-            face_crop = face_crop.astype('float') / 255.0
-            face_crop = img_to_array(face_crop)
-            face_crop = face_crop / 255
-            face_crop = np.expand_dims(face_crop, axis = 0)
+            # # Do preprocessing based on model
+            # face_crop = img[y:y + h, x:x + w]
+            # face_crop = cv2.resize(face_crop, (224, 224))
+            # # face_crop = face_crop.astype('float') / 255.0
+            # face_crop = img_to_array(face_crop)
+            # face_crop = face_crop / 255
+            # face_crop = np.expand_dims(face_crop, axis = 0)
             
-            # Predict gender
-            prediction = model.predict(face_crop)[0]
+            # # Predict gender
+            # prediction = self.model.predict(face_crop)[0]
             
-            # Get the max accuracy
-            idx = prediction.argmax(axis=-1)
+            # # Get the max accuracy
+            # idx = prediction.argmax(axis=-1)
             
-            # Get the label using the max accuracy
-            label_class = classes[idx]
+            # # Get the label using the max accuracy
+            # label_class = self.classes[idx]
             
-            # Create the format for label and confidence (%) to be displayed
-            label = '{}: {:2f}%'.format(label_class, prediction[idx] * 100)
+            # # Create the format for label and confidence (%) to be displayed
+            # label = '{}: {:2f}%'.format(label_class, prediction[idx] * 100)
             
-            # Write label and confidence above the face rectangle
-            cv2.putText(img, label, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            # # Write label and confidence above the face rectangle
+            # cv2.putText(img, label, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         
         return av.VideoFrame.from_ndarray(img, format = 'bgr24')
     
@@ -92,8 +94,8 @@ def main():
         st.write("Click on start to use webcam and detect your Gender")
         webrtc_streamer(key = 'example',
                         video_processor_factory = GenderDetection,
-                        mode = WebRtcMode.SENDRECV,
-                        rtc_configuration = RTC_CONFIGURATION,
+                        # mode = WebRtcMode.SENDRECV,
+                        # rtc_configuration = RTC_CONFIGURATION,
                         media_stream_constraints = {
                             'video': True,
                             'audio': False
