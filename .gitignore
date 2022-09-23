@@ -9,3 +9,4 @@ model/logs_2022*
 model/checkpoint
 report/epoch_accuracy.svg
 report/epoch_loss.svg
+*.psd
