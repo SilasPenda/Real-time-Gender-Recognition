@@ -13,7 +13,3 @@ streamlit-webrtc == 0.34.2
 av==8.1.0
 click==8
 kaggle==1.5.12
-tensor-board == 2.9.1
-pydrive2 ==
-dvc ==
-dvc[gdrive] ==
