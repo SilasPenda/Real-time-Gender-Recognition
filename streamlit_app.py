@@ -306,43 +306,43 @@ if detection_mode == "Webcam Real-time":
     spinner_message = "Wait a sec, getting some things done..."
 
     with st.spinner(spinner_message):
+        class VideoProcessor:
+            def recv(self, frame):
+                img = frame.to_ndarray(format = 'bgr24')
+                faces = face_cascade.detectMultiScale(image=img, scaleFactor=1.1, minNeighbors=minimum_neighbors, minSize=min_object_size)
 
-        def callback(frame):
-            img = frame.to_ndarray(format = 'bgr24')
-            faces = face_cascade.detectMultiScale(image=img, scaleFactor=1.1, minNeighbors=minimum_neighbors, minSize=min_object_size)
-
-            for (x, y, w, h) in faces:
-                # Draw rectangle over face
-                cv2.rectangle(img = img, pt1 = (x, y), pt2 = (x + w, y + h), color = (0, 255, 0), thickness = 2)
+                for (x, y, w, h) in faces:
+                    # Draw rectangle over face
+                    cv2.rectangle(img = img, pt1 = (x, y), pt2 = (x + w, y + h), color = (0, 255, 0), thickness = 2)
+                    
+                    # Do preprocessing based on model
+                    face_crop = img[y:y + h, x:x + w]
+                    face_crop = cv2.resize(face_crop, (224, 224))
+                    face_crop = img_to_array(face_crop)
+                    face_crop = face_crop / 255
+                    face_crop = np.expand_dims(face_crop, axis = 0)
+                    
+                    # Predict gender
+                    prediction = model.predict(face_crop)[0]
+                    
+                    # Get the max accuracy
+                    idx = prediction.argmax(axis=-1)
+                    
+                    # Get the label using the max accuracy
+                    label_class = classes[idx]
+                    
+                    # Create the format for label and confidence (%) to be displayed
+                    label = '{}: {:2f}%'.format(label_class, prediction[idx] * 100)
+                    
+                    # # Write label and confidence above the face rectangle
+                    cv2.putText(img, label, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 
-            # Do preprocessing based on model
-                face_crop = img[y:y + h, x:x + w]
-                face_crop = cv2.resize(face_crop, (224, 224))
-                face_crop = img_to_array(face_crop)
-                face_crop = face_crop / 255
-                face_crop = np.expand_dims(face_crop, axis = 0)
-                
-                # Predict gender
-                prediction = model.predict(face_crop)[0]
-                
-                # Get the max accuracy
-                idx = prediction.argmax(axis=-1)
-                
-                # Get the label using the max accuracy
-                label_class = classes[idx]
-                
-                # Create the format for label and confidence (%) to be displayed
-                label = '{}: {:2f}%'.format(label_class, prediction[idx] * 100)
-                
-                # # Write label and confidence above the face rectangle
-                cv2.putText(img, label, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-            
-            return av.VideoFrame.from_ndarray(img, format = 'bgr24')
+                return av.VideoFrame.from_ndarray(img, format = 'bgr24')
 
 
         webrtc_streamer(key = 'example',
                         rtc_configuration = RTC_CONFIGURATION,
-                        video_frame_callback= callback,
+                        video_processor_factory = VideoProcessor,
                         media_stream_constraints = {
                             'video': True,
                             'audio': False
@@ -356,3 +356,4 @@ hide_streamlit_style = """
             footer {visibility: hidden;}
             </style>
             """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
