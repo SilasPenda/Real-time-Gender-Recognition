@@ -10,7 +10,7 @@ In this project, we have used deep learning as a pre-cursor.
 - Dataset can be downloaded from [Kaggle](link) and placed in the root directory.
 <!-- I dont understand this line we didn't download any black men and women images from chrome -->
 - Used chrome extension to download images of black men and women with afro.
-- The dataset for the training can also be downloaded by running the notebook or by using the dvc pipeline. This require setting up kaggle api configuration detailed instruction can be find [below]()
+- The dataset for the training can also be downloaded by running the notebook or by using the dvc pipeline. This require setting up kaggle api configuration detailed instruction can be find [below]().
 
 
 
